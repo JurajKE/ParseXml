@@ -27,18 +27,23 @@ public class ExportXmlToList {
          return null;
     }
 
+    public static void setData(Element e , List<Student> studentsList){
+        String studentId =  e.getElementsByTagName("id").item(0).getTextContent();
+        String firtstName = e.getElementsByTagName("firstname").item(0).getTextContent();
+        String lastname = e.getElementsByTagName("lastname").item(0).getTextContent();
+        String subject = e.getElementsByTagName("subject").item(0).getTextContent();
+        String marks = e.getElementsByTagName("marks").item(0).getTextContent();
+        studentsList.add(new Student(studentId, firtstName, lastname, subject, marks));
+
+    }
+
     public static void iteration () {
         List<Student> studentList = new ArrayList<>();
         for (int i = 0 ; i < getNodeList().getLength() ; i++){
             Node node = getNodeList().item(i);
             if (node.getNodeType() == Node.ELEMENT_NODE) {
                 Element eElement = (Element) node;
-                String studentId =  eElement.getElementsByTagName("id").item(0).getTextContent();
-                String firtstName = eElement.getElementsByTagName("firstname").item(0).getTextContent();
-                String lastname = eElement.getElementsByTagName("lastname").item(0).getTextContent();
-                String subject = eElement.getElementsByTagName("subject").item(0).getTextContent();
-                String marks = eElement.getElementsByTagName("marks").item(0).getTextContent();
-                studentList.add(new Student(studentId, firtstName, lastname, subject, marks));
+                setData(eElement , studentList);
             }
         }
         for (Student student: studentList){
@@ -48,7 +53,6 @@ public class ExportXmlToList {
 
     public static void main(String[] args) {
         iteration();
-
     }
 
 }
