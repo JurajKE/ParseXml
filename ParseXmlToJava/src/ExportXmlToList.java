@@ -47,7 +47,6 @@ public class ExportXmlToList {
     }
 
     public static void main(String[] args) {
-        getNodeList();
         iteration();
 
     }
